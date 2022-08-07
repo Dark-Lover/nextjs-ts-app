@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 function Header() {
   return (
-    <header className="flex p-4 items-center justify-between bg-blue-50 h-20">
+    <header className="z-10 sticky top-0 w-full flex p-4 items-center justify-between bg-blue-50 h-20">
       <div className="text-2xl font-semibold text-text-dark_blue z-20">
         my<span className=" text-text-pumpk ">Store</span>
       </div>
