@@ -1,1 +1,5 @@
-[⌚] 1- Header with nav responsive, (🪓 fix cart count desktop)
+[✔️] 1- Header with nav responsive
+[✔️] 2- Hero section, 🪓 Add Carousel slick
+[✔️] 3- Collections section
+[✔️] 4- Bestsellers Products 
+[⌚] 5- Special with trend Products 

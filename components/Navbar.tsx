@@ -3,10 +3,18 @@ import { CgProfile } from "react-icons/cg";
 import { AiOutlineHeart, AiOutlineCloseCircle } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { menuItems } from "../temp/data";
-function Navbar() {
+
+interface NavBarProps {
+  menuCtrl?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Navbar({ menuCtrl }: NavBarProps) {
   return (
     <div className=" absolute h-screen bg-white top-0 left-0 w-60 sm:relative sm:w-full sm:h-auto sm:flex sm:justify-between sm:items-center sm:bg-transparent">
-      <AiOutlineCloseCircle className="absolute text-xl right-4 top-5 cursor-pointer sm:hidden " />
+      <AiOutlineCloseCircle
+        className="absolute text-xl right-4 top-5 cursor-pointer sm:hidden "
+        onClick={() => menuCtrl?.(false)}
+      />
       <nav className="">
         <ul className="flex flex-col pt-20 pb-10 px-8 sm:flex-row sm:gap-2 sm:pt-0 sm:pb-0 ">
           {menuItems.map((item, i) => (
