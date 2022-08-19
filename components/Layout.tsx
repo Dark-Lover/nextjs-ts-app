@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
+import Footer from "./Footer";
 import Header from "./Header";
 
 interface ILayout {
@@ -21,7 +22,7 @@ function Layout({ children }: ILayout) {
         {children}
 
         {/* Footer */}
-        <footer>footer</footer>
+        <Footer />
       </div>
     </div>
   );

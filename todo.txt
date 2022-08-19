@@ -3,3 +3,5 @@
 [✔️] 3- Collections section
 [✔️] 4- Bestsellers Products 
 [⌚] 5- Special with trend Products 
+[⌚] 6- Add slider to special Section
+[⌚] 7- Footer Section

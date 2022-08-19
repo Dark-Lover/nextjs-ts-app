@@ -12,7 +12,7 @@ function Collections() {
           alt="collection"
           className="rotate-12"
         />
-        <button className="flex justify-center items-center gap-2 font-semibold mt-2 px-4 py-2 border-2 border-gray-700 hover:bg-gray-400 hover:bg-opacity-30">
+        <button className="collection_btn">
           Explore All <BsArrowRight />
         </button>
       </div>
@@ -25,7 +25,7 @@ function Collections() {
           alt="collection"
           className="rotate-12"
         />
-        <button className="flex justify-center items-center gap-2 font-semibold mt-2 px-4 py-2 border-2 border-gray-700 hover:bg-gray-400 hover:bg-opacity-30">
+        <button className="collection_btn">
           Explore All <BsArrowRight />
         </button>
       </div>
@@ -38,7 +38,7 @@ function Collections() {
           alt="collection"
           className="rotate-12"
         />
-        <button className=" flex justify-center items-center gap-2 font-semibold mt-2 px-4 py-2 border-2 border-gray-700 hover:bg-gray-400 hover:bg-opacity-30">
+        <button className="collection_btn">
           Explore All <BsArrowRight />
         </button>
       </div>

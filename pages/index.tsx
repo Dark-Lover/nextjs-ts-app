@@ -3,6 +3,7 @@ import BestProducts from "../components/BestProducts";
 import Collections from "../components/Collections";
 
 import Hero from "../components/Hero";
+import Special from "../components/Special";
 
 const Home: NextPage = () => {
   return (
@@ -10,6 +11,7 @@ const Home: NextPage = () => {
       <Hero />
       <Collections />
       <BestProducts />
+      <Special />
     </>
   );
 };

@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Logo from "./Logo";
 import Navbar from "./Navbar";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   return (
-    <header className="z-10 sticky top-0 w-full flex p-4 items-center justify-between bg-white h-20">
-      <div className="text-2xl font-semibold text-text-dark_blue z-20">
-        my<span className=" text-text-pumpk ">Store</span>
-      </div>
+    <header className="z-30 sticky top-0 w-full flex p-4 items-center justify-between bg-white h-20">
+      <Logo />
       <GiHamburgerMenu
         className="text-xl cursor-pointer sm:hidden"
         onClick={() => setMenuOpen(true)}
