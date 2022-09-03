@@ -4,7 +4,13 @@ import {AiOutlineHeart,AiOutlineEye,AiOutlineShoppingCart,} from "react-icons/ai
 import { BiRefresh } from "react-icons/bi";
 import { Product } from "../types/types";
 
-function ProductItem({ prodData }: { prodData: Product }) {
+function ProductItem({
+  prodData,
+  isTrend,
+}: {
+  prodData: Product;
+  isTrend?: boolean;
+}) {
   return (
     <div className="shadow-md px-12 py-4 relative">
       <Image
@@ -15,8 +21,14 @@ function ProductItem({ prodData }: { prodData: Product }) {
       />
       <div className="flex justify-center items-center flex-col">
         <p className="text-gray-600 text-sm ">{prodData?.category}</p>
-        <h3 className="font-semibold tracking-wide my-1">
-          {prodData?.title.length > 20
+        <h3
+          className={`${
+            isTrend ? "text-xs " : ""
+          }font-semibold tracking-wide my-1`}
+        >
+          {isTrend
+            ? prodData?.title.substring(0, 15) + ".."
+            : prodData?.title.length > 20
             ? prodData?.title.substring(0, 20) + ".."
             : prodData?.title}
         </h3>

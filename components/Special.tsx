@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { BsArrowRight } from "react-icons/bs";
+import { Product } from "../types/types";
 import ProductItem from "./ProductItem";
-import ProductsWrapper from "./ProductsWrapper";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { settings } from "./../utils/SliderSettings";
 
-function Special() {
+function Special({ specialData }: { specialData: Product[] }) {
   return (
-    <section className="h-screen  mb-16 bg-blue-300  sm:h-80">
-      <div className="h-full grid grid-rows-2 bg-yellow-600 sm:grid-rows-1 sm:grid-cols-4">
+    <section className="h-screen  mb-16   sm:h-80">
+      <div className="h-full grid grid-rows-2  sm:grid-rows-1 sm:grid-cols-4">
         <div className=" relative flex flex-col justify-center items-center gap-10 bg-black sm:col-span-1">
           <h3 className="text-white font-semibold">New Trend Edition</h3>
           <div className="relative before:content-['_'] before:w-24 before:h-24 before:border-2 before:absolute before:overflow-hidden ">
@@ -22,14 +26,14 @@ function Special() {
             Explore All <BsArrowRight />
           </button>
         </div>
-        <div className="bg-yellow-300 sm:px-2 sm:col-span-3 relative flex justify-center flex-col items-center gap-2 ">
-          <div className=" flex flex-col sm:flex-row sm:gap-2 sm:flex-wrap">
-            <ProductItem />
-          </div>
-
-          <h5 className="flex justify-center items-center bg-pink-300 h-">
-            Slider controls
-          </h5>
+        <div className=" sm:inline-block sm:px-6 sm:col-span-3  gap-2 sm:my-auto">
+          {/* <div className="relative flex flex-col sm:flex-row sm:gap-2 "> */}
+          <Slider {...settings}>
+            {specialData.map((prod) => {
+              return <ProductItem prodData={prod} key={prod.id} isTrend />;
+            })}
+          </Slider>
+          {/* </div> */}
         </div>
       </div>
     </section>
