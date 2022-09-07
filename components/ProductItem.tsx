@@ -1,9 +1,15 @@
 import Image from "next/image";
 import { useState } from "react";
 //prettier-ignore
-import {AiOutlineHeart,AiOutlineEye,AiOutlineShoppingCart,} from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import {
+  AiOutlineHeart,
+  AiOutlineEye,
+  AiOutlineShoppingCart,
+  AiFillHeart,
+} from "react-icons/ai";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxToolkitHooks";
 import { addProduct } from "../store/cartSlice";
+import { likeProduct, myLikeItems } from "../store/likeSlice";
 import { Product } from "../types/types";
 
 function ProductItem({
@@ -14,7 +20,10 @@ function ProductItem({
   isTrend?: boolean;
 }) {
   const [isShow, setIsShow] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const likedItems = useAppSelector(myLikeItems);
+  const checkExits = likedItems.findIndex((el) => el.id === prodData.id);
+
   return (
     <div
       className="shadow-md px-12 py-4 relative cursor-pointer"
@@ -58,8 +67,17 @@ function ProductItem({
           >
             <AiOutlineShoppingCart />
           </div>
-          <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-            <AiOutlineHeart />
+          <div
+            className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1"
+            onClick={() => {
+              dispatch(likeProduct(prodData));
+            }}
+          >
+            {checkExits !== -1 ? (
+              <AiFillHeart className="text-red-600" />
+            ) : (
+              <AiOutlineHeart />
+            )}
           </div>
           <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
             <AiOutlineEye />

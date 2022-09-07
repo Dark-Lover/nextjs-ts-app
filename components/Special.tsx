@@ -26,6 +26,7 @@ function Special({ specialData }: { specialData: Product[] }) {
             Explore All <BsArrowRight />
           </button>
         </div>
+
         <div className=" w-96 mt-4 mx-auto sm:w-full sm:inline-block sm:px-6 sm:col-span-3  gap-2 sm:my-auto">
           <Slider {...settings}>
             {specialData.map((prod) => {

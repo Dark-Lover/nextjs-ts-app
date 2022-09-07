@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAppSelector } from "../hooks/reduxToolkitHooks";
 import { Product } from "../types/types";
 import ProductItem from "./ProductItem";
 import ProductsWrapper from "./ProductsWrapper";
@@ -10,6 +11,7 @@ function BestProducts({ bestData }: BestProductsProps) {
   const [cat, setCat] = useState(6);
   const cats = new Set(bestData.map((prod) => prod.category));
   const categories = [...cats];
+
   return (
     <section className="  pb-16">
       <h1 className=" text-center text-2xl font-semibold">

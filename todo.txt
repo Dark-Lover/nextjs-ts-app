@@ -2,6 +2,7 @@
 [✔️] 2- Hero section, 🪓 Add Carousel slick
 [✔️] 3- Collections section
 [✔️] 4- Bestsellers Products 
-[⌚] 5- Special with trend Products 
-[⌚] 6- Add slider to special Section (Processing 🪓)
+[✔️] 5- Special with trend Products 
+[✔️] 6- Add slider to special Section 
 [✔️] 7- Footer Section
+[⌚] 8- Like and cart 
