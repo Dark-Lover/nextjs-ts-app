@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Slider from "react-slick";
+import { settings } from "../utils/SliderSettings";
 
 function Hero() {
   return (
-    <section className="grid grid-rows-2 min-h-[70vh] py-10 relative overflow-hidden sm:grid-cols-2 sm:grid-rows-none">
+    <section className=" grid grid-rows-2 min-h-[70vh] py-10 relative overflow-hidden  sm:grid-cols-2 sm:grid-rows-none">
       <div className="-z-0 absolute rounded-full w-1/2 h-full top-0 right-0 bg-black opacity-5  rotate-45"></div>
       <div className="order-2 p-4 flex flex-col justify-center items-center max-w-sm  mx-auto sm:col-span-1">
         <p className=" uppercase font-thin mb-2 text-text-light_pumpk">

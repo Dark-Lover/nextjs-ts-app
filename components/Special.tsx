@@ -27,13 +27,11 @@ function Special({ specialData }: { specialData: Product[] }) {
           </button>
         </div>
         <div className=" w-96 mt-4 mx-auto sm:w-full sm:inline-block sm:px-6 sm:col-span-3  gap-2 sm:my-auto">
-          {/* <div className="relative flex flex-col sm:flex-row sm:gap-2 "> */}
           <Slider {...settings}>
             {specialData.map((prod) => {
               return <ProductItem prodData={prod} key={prod.id} isTrend />;
             })}
           </Slider>
-          {/* </div> */}
         </div>
       </div>
     </section>

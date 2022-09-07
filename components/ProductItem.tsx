@@ -1,7 +1,9 @@
 import Image from "next/image";
+import { useState } from "react";
 //prettier-ignore
 import {AiOutlineHeart,AiOutlineEye,AiOutlineShoppingCart,} from "react-icons/ai";
-import { BiRefresh } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../store/cartSlice";
 import { Product } from "../types/types";
 
 function ProductItem({
@@ -11,8 +13,14 @@ function ProductItem({
   prodData: Product;
   isTrend?: boolean;
 }) {
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const dispatch = useDispatch();
   return (
-    <div className="shadow-md px-12 py-4 relative">
+    <div
+      className="shadow-md px-12 py-4 relative cursor-pointer"
+      onMouseEnter={() => setIsShow(true)}
+      onMouseLeave={() => setIsShow(false)}
+    >
       <Image
         src={prodData?.image ? prodData?.image : "/images/sneakers.png"}
         height={150}
@@ -40,20 +48,25 @@ function ProductItem({
       <span className="absolute top-2 left-2 text-xs bg-red-500 px-3 py-1 rounded-xl text-white">
         New
       </span>
-      <div className="absolute top-0 right-0 pt-4 pr-2 flex flex-col gap-3">
-        <div className="cursor-pointer transition text-gray-500 hover:text-black text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-          <AiOutlineShoppingCart />
+      {isShow && (
+        <div
+          className={`absolute  top-0 right-0 pt-4 pr-2 flex flex-col gap-3  `}
+        >
+          <div
+            className="cursor-pointer transition text-gray-500 hover:text-black text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1"
+            onClick={() => dispatch(addProduct(prodData))}
+          >
+            <AiOutlineShoppingCart />
+          </div>
+          <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
+            <AiOutlineHeart />
+          </div>
+          <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
+            <AiOutlineEye />
+          </div>
         </div>
-        <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-          <AiOutlineHeart />
-        </div>
-        <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-          <AiOutlineEye />
-        </div>
-        <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-          <BiRefresh />
-        </div>
-      </div>
+      )}
+      {/*  */}
     </div>
   );
 }
