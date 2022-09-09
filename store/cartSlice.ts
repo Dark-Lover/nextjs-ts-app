@@ -17,13 +17,28 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct(state, action: PayloadAction<Product>) {
-      console.log();
-      state.cartItems.push(action.payload);
+      const indexProd = state.cartItems.findIndex(
+        (el) => el.id === action.payload.id
+      );
+      if (indexProd === -1)
+        return {
+          ...state,
+          cartItems: [...state.cartItems, action.payload],
+        };
+      else {
+        const newCartItems = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        return {
+          ...state,
+          cartItems: [...newCartItems],
+        };
+      }
     },
   },
 });
 
 export const { addProduct } = cartSlice.actions;
 
-export const cartItems = (state: RootState) => state.cart.cartItems;
+export const myCartItems = (state: RootState) => state.cart.cartItems;
 export default cartSlice.reducer;

@@ -1,14 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
 //prettier-ignore
-import {
-  AiOutlineHeart,
-  AiOutlineEye,
-  AiOutlineShoppingCart,
-  AiFillHeart,
-} from "react-icons/ai";
+import {AiOutlineHeart,AiOutlineEye,AiFillHeart,} from "react-icons/ai";
+import { MdOutlineShoppingCart, MdShoppingCart } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxToolkitHooks";
-import { addProduct } from "../store/cartSlice";
+import { addProduct, myCartItems } from "../store/cartSlice";
 import { likeProduct, myLikeItems } from "../store/likeSlice";
 import { Product } from "../types/types";
 
@@ -22,7 +18,9 @@ function ProductItem({
   const [isShow, setIsShow] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const likedItems = useAppSelector(myLikeItems);
-  const checkExits = likedItems.findIndex((el) => el.id === prodData.id);
+  const cartItems = useAppSelector(myCartItems);
+  const checkExitsLike = likedItems.findIndex((el) => el.id === prodData.id);
+  const checkExitsCart = cartItems.findIndex((el) => el.id === prodData.id);
 
   return (
     <div
@@ -65,7 +63,11 @@ function ProductItem({
             className="cursor-pointer transition text-gray-500 hover:text-black text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1"
             onClick={() => dispatch(addProduct(prodData))}
           >
-            <AiOutlineShoppingCart />
+            {checkExitsCart !== -1 ? (
+              <MdShoppingCart className="text-bgs-violet" />
+            ) : (
+              <MdOutlineShoppingCart />
+            )}
           </div>
           <div
             className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1"
@@ -73,7 +75,7 @@ function ProductItem({
               dispatch(likeProduct(prodData));
             }}
           >
-            {checkExits !== -1 ? (
+            {checkExitsLike !== -1 ? (
               <AiFillHeart className="text-red-600" />
             ) : (
               <AiOutlineHeart />

@@ -3,12 +3,17 @@ import { CgProfile } from "react-icons/cg";
 import { AiOutlineHeart, AiOutlineCloseCircle } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { menuItems } from "../temp/data";
+import { useAppSelector } from "../hooks/reduxToolkitHooks";
+import { myCartItems } from "../store/cartSlice";
+import { myLikeItems } from "../store/likeSlice";
 
 interface NavBarProps {
   menuCtrl?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({ menuCtrl }: NavBarProps) {
+  const cartItemsCount = useAppSelector(myCartItems).length;
+  const likeItemsCount = useAppSelector(myLikeItems).length;
   return (
     <div className=" absolute h-screen bg-white top-0 left-0 w-60 sm:relative sm:w-full sm:h-auto sm:flex sm:justify-between sm:items-center sm:bg-transparent">
       <AiOutlineCloseCircle
@@ -40,7 +45,7 @@ function Navbar({ menuCtrl }: NavBarProps) {
           <div className="flex justify-between w-full sm:hidden">
             <span className="sm:hidden">Whishlist</span>
             <span className="w-5 h-5 rounded-full bg-text-pumpk text-white text-xs flex items-center justify-center ">
-              3
+              {likeItemsCount}
             </span>
           </div>
         </div>
@@ -52,7 +57,7 @@ function Navbar({ menuCtrl }: NavBarProps) {
               <span className="text-text-light_pumpk sm:hidden"> 198$.00</span>
             </>
             <span className="  w-5 h-5 rounded-full bg-text-pumpk text-white text-xs flex items-center justify-center ">
-              3
+              {cartItemsCount}
             </span>
           </div>
         </div>

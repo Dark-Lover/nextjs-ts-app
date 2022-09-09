@@ -5,4 +5,7 @@
 [✔️] 5- Special with trend Products 
 [✔️] 6- Add slider to special Section 
 [✔️] 7- Footer Section
-[⌚] 8- Like and cart 
+[✔️] 8- Like and cart implementation with redux toolkit
+[⌚] 9- Cart modal
+[⌚] 10- All Product page
+[⌚] 11- Product detail page

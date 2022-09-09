@@ -20,12 +20,19 @@ export const likeSlice = createSlice({
       const indexProd = state.likeItems.findIndex(
         (el) => el.id === action.payload.id
       );
-      if (indexProd === -1) state.likeItems.push(action.payload);
+      if (indexProd === -1)
+        return {
+          ...state,
+          likeItems: [...state.likeItems, action.payload],
+        };
       else {
-        const newLikeItems = state.likeItems.filter(
+        const newlikeItems = state.likeItems.filter(
           (item) => item.id !== action.payload.id
         );
-        state.likeItems = [...newLikeItems];
+        return {
+          ...state,
+          likeItems: [...newlikeItems],
+        };
       }
     },
   },
