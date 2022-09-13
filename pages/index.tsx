@@ -4,7 +4,6 @@ import BestProducts from "../components/BestProducts";
 import Collections from "../components/Collections";
 import Hero from "../components/Hero";
 import Special from "../components/Special";
-import { initFirebase } from "../firebase/clientApp";
 import { Product } from "../types/types";
 
 const Home: NextPage<{ data: Product[] }> = ({ data }) => {
@@ -25,8 +24,6 @@ const Home: NextPage<{ data: Product[] }> = ({ data }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const app = initFirebase();
-  console.log(app);
   const { data } = await axios.get("https://fakestoreapi.com/products");
   return {
     props: {

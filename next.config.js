@@ -5,6 +5,11 @@ const nextConfig = {
   images: {
     domains: ["fakestoreapi.com"],
   },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;

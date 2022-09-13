@@ -9,12 +9,12 @@ import {
 } from "../config/config";
 
 const firebaseConfig = {
-  // apiKey: apiKey,
-  // authDomain: authDomain,
-  // projectId: projectId,
-  // storageBucket: storageBucket,
-  // messagingSenderId: messagingSenderId,
-  // appId: appId,
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);

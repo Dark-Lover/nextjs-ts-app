@@ -6,14 +6,29 @@ import { menuItems } from "../temp/data";
 import { useAppSelector } from "../hooks/reduxToolkitHooks";
 import { myCartItems } from "../store/cartSlice";
 import { myLikeItems } from "../store/likeSlice";
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { firebaseApp } from "../firebase/clientApp";
+import { useRouter } from "next/router";
+import { useState } from "react";
 interface NavBarProps {
   menuCtrl?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({ menuCtrl }: NavBarProps) {
+  const [isIn, setIsIn] = useState<boolean>(false);
+
   const cartItemsCount = useAppSelector(myCartItems).length;
   const likeItemsCount = useAppSelector(myLikeItems).length;
+  const router = useRouter();
+  const myFirebaseAuth = getAuth(firebaseApp);
+  const provider = new GoogleAuthProvider();
+  const signIn = async () => {
+    const { user } = await signInWithPopup(myFirebaseAuth, provider);
+    const { refreshToken, providerData } = user;
+    localStorage.setItem("user", JSON.stringify(providerData));
+    localStorage.setItem("accessToken", JSON.stringify(refreshToken));
+  };
+
   return (
     <div className=" absolute h-screen bg-white top-0 left-0 w-60 sm:relative sm:w-full sm:h-auto sm:flex sm:justify-between sm:items-center sm:bg-transparent">
       <AiOutlineCloseCircle
@@ -37,7 +52,11 @@ function Navbar({ menuCtrl }: NavBarProps) {
           <BiSearchAlt2 className=" cursor-pointer" />
         </div>
         <div className="flex items-center  gap-4 sm:py-4 sm:text-xl ">
-          <CgProfile className=" cursor-pointer" />{" "}
+          {isIn ? (
+            "In"
+          ) : (
+            <CgProfile className=" cursor-pointer" onClick={() => signIn()} />
+          )}
           <span className="sm:hidden">Login / Register</span>
         </div>
         <div className="flex items-center gap-4 sm:relative">
