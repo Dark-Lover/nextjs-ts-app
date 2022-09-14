@@ -6,20 +6,27 @@ import { menuItems } from "../temp/data";
 import { useAppSelector } from "../hooks/reduxToolkitHooks";
 import { myCartItems } from "../store/cartSlice";
 import { myLikeItems } from "../store/likeSlice";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  UserInfo,
+} from "firebase/auth";
 import { firebaseApp } from "../firebase/clientApp";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getUserInfo } from "../utils/getUserInfo";
+import Image from "next/image";
+
 interface NavBarProps {
   menuCtrl?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({ menuCtrl }: NavBarProps) {
   const [isIn, setIsIn] = useState<boolean>(false);
+  const [user, setUser] = useState<null | UserInfo>(null);
 
   const cartItemsCount = useAppSelector(myCartItems).length;
   const likeItemsCount = useAppSelector(myLikeItems).length;
-  const router = useRouter();
   const myFirebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
   const signIn = async () => {
@@ -27,8 +34,28 @@ function Navbar({ menuCtrl }: NavBarProps) {
     const { refreshToken, providerData } = user;
     localStorage.setItem("user", JSON.stringify(providerData));
     localStorage.setItem("accessToken", JSON.stringify(refreshToken));
+    const [myDataUser]: UserInfo[] = providerData;
+    setUser(myDataUser);
+    setIsIn(true);
+    console.log("Im the signIn");
   };
 
+  useEffect(() => {
+    const userData = getUserInfo();
+    if (userData) {
+      console.log("Im the localStorage");
+      const [uData] = userData;
+      setUser(uData);
+      setIsIn(true);
+    }
+  }, []);
+
+  const signOut = () => {
+    console.log("sign Out");
+    localStorage.clear();
+    setIsIn(false);
+    setUser(null);
+  };
   return (
     <div className=" absolute h-screen bg-white top-0 left-0 w-60 sm:relative sm:w-full sm:h-auto sm:flex sm:justify-between sm:items-center sm:bg-transparent">
       <AiOutlineCloseCircle
@@ -53,7 +80,16 @@ function Navbar({ menuCtrl }: NavBarProps) {
         </div>
         <div className="flex items-center  gap-4 sm:py-4 sm:text-xl ">
           {isIn ? (
-            "In"
+            <div className="w-7 h-7 relative rounded-2xl flex justify-center items-center overflow-hidden">
+              <Image
+                src={user?.photoURL}
+                alt="avatar"
+                width={30}
+                height={30}
+                className="cursor-pointer absolute left-0 top-0"
+                onClick={() => signOut()}
+              />
+            </div>
           ) : (
             <CgProfile className=" cursor-pointer" onClick={() => signIn()} />
           )}

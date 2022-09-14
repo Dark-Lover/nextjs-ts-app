@@ -7,7 +7,6 @@ import Special from "../components/Special";
 import { Product } from "../types/types";
 
 const Home: NextPage<{ data: Product[] }> = ({ data }) => {
-  // console.log(data);
   const bestProds = data.filter((prod) => prod.rating.rate > 4);
   const specialProds = data.filter((prod) => prod.rating.count > 150);
 
