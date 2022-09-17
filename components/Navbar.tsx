@@ -1,43 +1,54 @@
-import { BiSearchAlt2 } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineHeart, AiOutlineCloseCircle } from "react-icons/ai";
-import { BsHandbag } from "react-icons/bs";
-import { menuItems } from "../temp/data";
-import { useAppSelector } from "../hooks/reduxToolkitHooks";
+// Nextjs React Imports
+import { useState, useEffect } from "react";
+import Image from "next/image";
+// Firebase
+//prettier-ignore
+import {getAuth,signInWithPopup,GoogleAuthProvider,UserInfo,} from "firebase/auth";
+import { firebaseApp } from "../firebase/clientApp";
+// Redux Toolkit
 import { myCartItems } from "../store/cartSlice";
 import { myLikeItems } from "../store/likeSlice";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  UserInfo,
-} from "firebase/auth";
-import { firebaseApp } from "../firebase/clientApp";
-import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxToolkitHooks";
+// Data and utils
+import { menuItems } from "../temp/data";
 import { getUserInfo } from "../utils/getUserInfo";
-import Image from "next/image";
+// Icons
+import { BiSearchAlt2 } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { BsHandbag } from "react-icons/bs";
+import { AiOutlineHeart, AiOutlineCloseCircle } from "react-icons/ai";
+import { authUserInfo, logIn, logOut } from "../store/userSlice";
 
 interface NavBarProps {
   menuCtrl?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({ menuCtrl }: NavBarProps) {
-  const [isIn, setIsIn] = useState<boolean>(false);
-  const [user, setUser] = useState<null | UserInfo>(null);
-
+  // Redux Toolkit
   const cartItemsCount = useAppSelector(myCartItems).length;
   const likeItemsCount = useAppSelector(myLikeItems).length;
+  const { logState, userData } = useAppSelector(authUserInfo);
+  const dispatch = useAppDispatch();
+
+  // Firebase Implementation
   const myFirebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
+  // SignIn
   const signIn = async () => {
     const { user } = await signInWithPopup(myFirebaseAuth, provider);
     const { refreshToken, providerData } = user;
     localStorage.setItem("user", JSON.stringify(providerData));
     localStorage.setItem("accessToken", JSON.stringify(refreshToken));
     const [myDataUser]: UserInfo[] = providerData;
-    setUser(myDataUser);
-    setIsIn(true);
+
+    dispatch(logIn(myDataUser));
     console.log("Im the signIn");
+  };
+  // SignOut
+  const signOut = () => {
+    console.log("sign Out");
+    localStorage.clear();
+    dispatch(logOut());
   };
 
   useEffect(() => {
@@ -45,17 +56,10 @@ function Navbar({ menuCtrl }: NavBarProps) {
     if (userData) {
       console.log("Im the localStorage");
       const [uData] = userData;
-      setUser(uData);
-      setIsIn(true);
+      dispatch(logIn(uData));
     }
-  }, []);
+  }, [dispatch]);
 
-  const signOut = () => {
-    console.log("sign Out");
-    localStorage.clear();
-    setIsIn(false);
-    setUser(null);
-  };
   return (
     <div className=" absolute h-screen bg-white top-0 left-0 w-60 sm:relative sm:w-full sm:h-auto sm:flex sm:justify-between sm:items-center sm:bg-transparent">
       <AiOutlineCloseCircle
@@ -79,10 +83,10 @@ function Navbar({ menuCtrl }: NavBarProps) {
           <BiSearchAlt2 className=" cursor-pointer" />
         </div>
         <div className="flex items-center  gap-4 sm:py-4 sm:text-xl ">
-          {isIn ? (
+          {logState ? (
             <div className="w-7 h-7 relative rounded-2xl flex justify-center items-center overflow-hidden">
               <Image
-                src={user?.photoURL}
+                src={userData?.photoURL ? userData?.photoURL : ""}
                 alt="avatar"
                 width={30}
                 height={30}

@@ -1,12 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {
-  apiKey,
-  authDomain,
-  projectId,
-  storageBucket,
-  messagingSenderId,
-  appId,
-} from "../config/config";
+//prettier-ignore
+import {apiKey,authDomain,projectId,storageBucket,messagingSenderId,appId,} from "../config/config";
 
 const firebaseConfig = {
   apiKey: apiKey,

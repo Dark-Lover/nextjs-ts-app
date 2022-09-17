@@ -6,6 +6,7 @@ import { MdOutlineShoppingCart, MdShoppingCart } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxToolkitHooks";
 import { addProduct, myCartItems } from "../store/cartSlice";
 import { likeProduct, myLikeItems } from "../store/likeSlice";
+import { authUserInfo } from "../store/userSlice";
 import { Product } from "../types/types";
 
 function ProductItem({
@@ -16,16 +17,23 @@ function ProductItem({
   isTrend?: boolean;
 }) {
   const [isShow, setIsShow] = useState<boolean>(false);
+  // Redux toolkit for cart like and user
   const dispatch = useAppDispatch();
   const likedItems = useAppSelector(myLikeItems);
   const cartItems = useAppSelector(myCartItems);
+  const { logState } = useAppSelector(authUserInfo);
+
   const checkExitsLike = likedItems.findIndex((el) => el.id === prodData.id);
   const checkExitsCart = cartItems.findIndex((el) => el.id === prodData.id);
 
   return (
     <div
       className="shadow-md px-12 py-4 relative cursor-pointer"
-      onMouseEnter={() => setIsShow(true)}
+      onMouseEnter={() => {
+        if (logState) {
+          setIsShow(true);
+        }
+      }}
       onMouseLeave={() => setIsShow(false)}
     >
       <Image
