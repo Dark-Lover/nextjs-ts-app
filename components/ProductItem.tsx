@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 //prettier-ignore
 import {AiOutlineHeart,AiOutlineEye,AiFillHeart,} from "react-icons/ai";
@@ -90,7 +91,9 @@ function ProductItem({
             )}
           </div>
           <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
-            <AiOutlineEye />
+            <Link href={`/products/${prodData.id}`}>
+              <AiOutlineEye />
+            </Link>
           </div>
         </div>
       )}

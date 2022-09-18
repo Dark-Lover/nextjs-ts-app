@@ -19,7 +19,7 @@ function Layout({ children }: ILayout) {
 
         <Header />
         {/* Main content */}
-        {children}
+        <div className="min-h-[258px] ">{children}</div>
 
         {/* Footer */}
         <Footer />

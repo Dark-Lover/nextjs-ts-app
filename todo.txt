@@ -7,5 +7,6 @@
 [✔️] 7- Footer Section
 [✔️] 8- Like and cart implementation with redux toolkit
 [⌚] 9- Cart modal
-[⌚] 10- All Product page
+[✔️] 10- All Product page
 [⌚] 11- Product detail page
+[⌚] 12- Fix GetstaticPaths for product/[id]

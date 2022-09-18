@@ -35,10 +35,15 @@ export const likeSlice = createSlice({
         };
       }
     },
+    resetLikes() {
+      return {
+        ...initialState,
+      };
+    },
   },
 });
 
-export const { likeProduct } = likeSlice.actions;
+export const { likeProduct, resetLikes } = likeSlice.actions;
 
 export const myLikeItems = (state: RootState) => state.like.likeItems;
 
