@@ -37,7 +37,7 @@ function Navbar({ menuCtrl }: NavBarProps) {
   // SignIn
   const signIn = async () => {
     const { user } = await signInWithPopup(myFirebaseAuth, provider);
-    console.log(user);
+
     const { refreshToken, providerData } = user;
     localStorage.setItem("user", JSON.stringify(providerData));
     localStorage.setItem("accessToken", JSON.stringify(refreshToken));

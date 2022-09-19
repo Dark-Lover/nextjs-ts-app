@@ -1,21 +1,34 @@
 import axios from "axios";
-import { GetStaticPaths, GetStaticProps } from "next";
 
-function ProductDetail() {
+import { GetProductsResults, Product } from "../../types/types";
+
+function ProductDetail({ data }: { data: Product }) {
   return <>Im the product Detail </>;
 }
 
 export default ProductDetail;
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+export const getStaticPaths = async () => {
+  const { data }: GetProductsResults = await axios.get(
+    `https://fakestoreapi.com/products`
+  );
+  const paths = data.map((prod) => {
+    return { params: { id: String(prod.id) } };
+  });
+
   return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
+    paths: paths,
+    fallback: false, // can also be true or 'blocking'
   };
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await axios.get("https://fakestoreapi.com/products");
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
+  const { id } = params;
+  const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
   return {
     props: {
       data,

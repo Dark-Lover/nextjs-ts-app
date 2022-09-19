@@ -92,7 +92,9 @@ function ProductItem({
           </div>
           <div className="cursor-pointer transition text-gray-500 hover:text-black  text-xl bg-white w-8 h-8 rounded-full flex justify-center items-center p-1">
             <Link href={`/products/${prodData.id}`}>
-              <AiOutlineEye />
+              <a>
+                <AiOutlineEye />
+              </a>
             </Link>
           </div>
         </div>
