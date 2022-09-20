@@ -113,7 +113,15 @@ function Navbar({ menuCtrl }: NavBarProps) {
             ) : (
               ""
             )}
-            <AiOutlineHeart className="cursor-pointer " />
+            {likeItemsCount ? (
+              <Link href="/whishlist">
+                <a>
+                  <AiOutlineHeart className="cursor-pointer " />
+                </a>
+              </Link>
+            ) : (
+              <AiOutlineHeart className="cursor-pointer " />
+            )}
           </div>
           <div className="flex justify-between w-full sm:hidden">
             <span className="sm:hidden">Whishlist</span>

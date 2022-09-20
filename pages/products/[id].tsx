@@ -1,9 +1,21 @@
 import axios from "axios";
+import Image from "next/image";
+import ProductItem from "../../components/ProductItem";
 
 import { GetProductsResults, Product } from "../../types/types";
 
 function ProductDetail({ data }: { data: Product }) {
-  return <>Im the product Detail </>;
+  const { category, description, id, image, title } = data;
+  return (
+    <section className="p-4">
+      <h1 className=" text-center text-2xl font-semibold mb-8">
+        Product Details
+      </h1>
+      <div className="max-w-sm m-auto">
+        <ProductItem key={id} prodData={data} onDetail />
+      </div>
+    </section>
+  );
 }
 
 export default ProductDetail;
