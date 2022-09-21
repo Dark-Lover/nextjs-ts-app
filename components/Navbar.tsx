@@ -71,7 +71,7 @@ function Navbar({ menuCtrl }: NavBarProps) {
         onClick={() => menuCtrl?.(false)}
       />
       <nav className="">
-        <ul className="flex flex-col pt-20 pb-10 px-8 sm:flex-row sm:gap-2 sm:pt-0 sm:pb-0 ">
+        <ul className="flex flex-col pt-20 pb-10 px-6 sm:flex-row sm:gap-1 sm:pt-0 sm:pb-0 ">
           {menuItems.map((item, i) => (
             <Link href={item.path} key={i}>
               <li className=" relative  border-b-2 py-2 px-2 sm:cursor-pointer sm:border-b-0 sm:text-center sm:before:left-0 sm:before:ease-in-out sm:before:transition-all sm:before:absolute sm:before:w-0 sm:before:h-0.5 sm:before:bg-text-light_pumpk sm:before:bottom-0 sm:hover:before:w-full">
@@ -133,15 +133,19 @@ function Navbar({ menuCtrl }: NavBarProps) {
         <div className="flex items-center gap-4 sm:relative">
           <div className="sm:relative">
             {cartItemsCount !== 0 ? (
-              <div className="hidden sm:flex sm:before:absolute sm:before:w-4 sm:before:h-4 sm:before:bg-text-light_pumpk sm:before:rounded-xl sm:before:text-[10px]  sm:before:top-[-9px] sm:before:left-[-7px] sm:before:content-['_']">
-                <span className="absolute text-xs top-[-10px] left-[-2px] text-white">
-                  {cartItemsCount}
-                </span>
-              </div>
+              <Link href="/cart">
+                <a>
+                  <div className="hidden sm:flex sm:before:absolute sm:before:w-4 sm:before:h-4 sm:before:bg-text-light_pumpk sm:before:rounded-xl sm:before:text-[10px]  sm:before:top-[-9px] sm:before:left-[-7px] sm:before:content-['_']">
+                    <span className="absolute text-xs top-[-10px] left-[-2px] text-white">
+                      {cartItemsCount}
+                    </span>
+                  </div>
+                  <BsHandbag className=" cursor-pointer" />
+                </a>
+              </Link>
             ) : (
-              ""
+              <BsHandbag className=" cursor-pointer" />
             )}
-            <BsHandbag className=" cursor-pointer" />
           </div>
           <div className="flex justify-between w-full sm:hidden">
             <>

@@ -15,3 +15,7 @@ interface Rating {
 export interface GetProductsResults {
   data: Product[];
 }
+
+export interface ICartItem {
+  prod: Product;
+}

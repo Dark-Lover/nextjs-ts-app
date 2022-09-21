@@ -6,7 +6,8 @@
 [✔️] 6- Add slider to special Section 
 [✔️] 7- Footer Section
 [✔️] 8- Like and cart implementation with redux toolkit
-[⌚] 9- Cart modal
+[✔️] 9- Cart Page
 [✔️] 10- All Product page
-[⌚] 11- Product detail page
-[⌚] 12- Fix GetstaticPaths for product/[id]
+[✔️] 11- Product detail page
+[✔️] 12- Fix GetstaticPaths for product/[id]
+[⌚] 13- Add form checkout
