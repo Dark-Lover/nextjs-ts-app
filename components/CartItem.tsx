@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { Product } from "../types/types";
-
+import { MdDelete } from "react-icons/md";
+import { useAppDispatch } from "../hooks/reduxToolkitHooks";
+import { addProduct } from "../store/cartSlice";
 function CartItem({ prod }: { prod: Product }) {
-  console.log("my Cart Prod: ", prod);
+  const dispatch = useAppDispatch();
   return (
     <div className="flex p-2 w-lg ">
       <div className="border-[1px] p-1 rounded-lg flex justify-center items-center ">
@@ -14,8 +16,14 @@ function CartItem({ prod }: { prod: Product }) {
         </h2>
         <small className="text-xs text-gray-600">{prod.category}</small>
       </div>
-      <div className=" text-xs flex items-center font-semibold min-w-[45px] text-text-dark_blue px-1 sm:text-sm">
-        {prod.price}0$
+      <div className=" text-xs flex items-center justify-center font-semibold w-[55px] text-text-dark_blue px-1 sm:text-sm">
+        {prod.price}$
+      </div>
+      <div className="flex justify-center items-center ">
+        <MdDelete
+          className="text-red-500 cursor-pointer"
+          onClick={() => dispatch(addProduct(prod))}
+        />
       </div>
     </div>
   );

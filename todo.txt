@@ -10,4 +10,5 @@
 [✔️] 10- All Product page
 [✔️] 11- Product detail page
 [✔️] 12- Fix GetstaticPaths for product/[id]
-[⌚] 13- Add form checkout
+[✔️] 13- Add Cart items with Total amount
+[⌚] 14- Add form checkout (formik or react-form-hook 🪓)
