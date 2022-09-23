@@ -19,3 +19,10 @@ export interface GetProductsResults {
 export interface ICartItem {
   prod: Product;
 }
+
+export interface IInitVal {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+}

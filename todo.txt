@@ -12,3 +12,4 @@
 [✔️] 12- Fix GetstaticPaths for product/[id]
 [✔️] 13- Add Cart items with Total amount
 [⌚] 14- Add form checkout (formik or react-form-hook 🪓)
+[⌚] 15- Fix Mobile menu nav links and close menu when link clicked

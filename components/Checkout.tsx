@@ -1,11 +1,14 @@
 import { Formik, FormikErrors, FormikValues } from "formik";
-interface IInitVal {
-  firstName: string;
-  lastName: string;
-}
+import { IInitVal } from "../types/types";
 
 function Checkout() {
-  const initialVal: IInitVal = { firstName: "", lastName: "" };
+  const initialVal: IInitVal = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+  };
+
   console.log("Checkout Render now");
   return (
     <div className="flex flex-col p-4  sm:flex-1">
@@ -16,18 +19,23 @@ function Checkout() {
           const errors: FormikErrors<FormikValues> = {};
           if (!values.firstName) {
             errors.firstName = "Required";
+          } else if (!values.lastName) {
+            errors.lastName = "Required";
+          } else if (!values.address) {
+            errors.address = "Required";
+          } else if (!values.email) {
+            errors.email = "Required";
           } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.firstName)
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.firstName = "Invalid firstName address";
+            errors.email = "Invalid email address";
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          console.log(values);
+          setSubmitting(false);
+          resetForm();
         }}
       >
         {({
@@ -41,25 +49,75 @@ function Checkout() {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
-            <label htmlFor="firstname">First Name</label>
-            <input
-              type="firstName"
-              name="firstName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.firstName}
-            />
-            {errors.firstName && touched.firstName && errors.firstName}
-            <label htmlFor="lastname">Last Name</label>
-            <input
-              type="lastName"
-              name="lastName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.lastName}
-            />
-            {errors.lastName && touched.lastName && errors.lastName}
-            <button type="submit" disabled={isSubmitting}>
+            <div className="flex w-full">
+              <div>
+                <input
+                  autoComplete="off"
+                  type="firstName"
+                  name="firstName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.firstName}
+                  className="border-b-2  outline-none px-4 py-1 mr-2 placeholder:text-xs"
+                  placeholder="First Name"
+                />
+                <small className="text-red-400">
+                  {errors.firstName && touched.firstName && errors.firstName}
+                </small>
+              </div>
+              <div>
+                <input
+                  autoComplete="off"
+                  type="lastName"
+                  name="lastName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.lastName}
+                  className="border-b-2  outline-none px-4 py-1 placeholder:text-xs"
+                  placeholder="Last Name"
+                />
+                <small className="text-red-400">
+                  {errors.lastName && touched.lastName && errors.lastName}
+                </small>
+              </div>
+            </div>
+
+            <div>
+              <input
+                autoComplete="off"
+                type="email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                className="border-b-2 w-full outline-none px-4 py-1 placeholder:text-xs mt-4"
+                placeholder="Email"
+              />
+              <small className="text-red-400">
+                {errors.email && touched.email && errors.email}
+              </small>
+            </div>
+            <div>
+              <input
+                autoComplete="off"
+                type="address"
+                name="address"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.address}
+                className="border-b-2 w-full outline-none px-4 py-1 placeholder:text-xs mt-4"
+                placeholder="Address"
+              />
+              <small className="text-red-400">
+                {errors.address && touched.address && errors.address}
+              </small>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="cursor-pointer block bg-text-pumpk text-white px-4 py-2 mt-4"
+            >
               Submit
             </button>
           </form>
